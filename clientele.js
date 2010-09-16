@@ -310,6 +310,7 @@ clientele.Formality.prototype.bindDefaultedTextInputs = function() {
 
 /* ------------------------------------------------------------
  * supersleight: jQuery plugin for dynamic handling of IE6 png transparency
+ * http://allinthehead.com/retro/338/supersleight-jquery-plugin
  * ------------------------------------------------------------ 
  */
 jQuery.fn.supersleight = function(settings) {

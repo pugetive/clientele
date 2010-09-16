@@ -12,7 +12,7 @@ The library currently includes:
   * [default ON ] Image replacement to replace live text headings with non-websafe typography embedded in images
   * [default OFF] Image placeholders to automatically display a "spinner" image while large images load
   * [default OFF] Automatic IE6 transparency fixing for PNG-24s under specified branch of the DOM
-  * [default ON ] Automatic handling of "default" text in input fields
+  * [default ON ] Show default text in input fields when specified, hide on focus.
   
 QUICK START
 -----------
@@ -29,7 +29,8 @@ Instantiate the default functionality (currently: image replacement and default 
 
     <form action="#">
       <fieldset>
-        <input type="text" title="Type Stuff Here" name="stuff" />
+        <label for="stuff">This input field will have text that goes away when the element gets focus.</label>
+        <input class="c-defaulted" type="text" title="Type Stuff Here" name="stuff" />
       </fieldset>
     </form>
 
@@ -43,5 +44,3 @@ are also handled by supersleight):
 
     new clientele.Standard({imagery: {doPngTransparency: true,
                                       pngAncestorSelector: '.elements-containing-pngs'}})
-
-
