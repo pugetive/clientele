@@ -1,11 +1,13 @@
 CLIENTELE
 ---------
 
-Clientele was created to DRY up some of the JS work commonly required by design-centered websites. Currently offering very
-few features, the library's intention is to bake in handling for many of the edge cases we run into while cranking out 
-client sites. It relies on jquery-1.4.2.min.js.
+Clientele was created to DRY up some of the JS work commonly required when cranking design-centered websites. 
+Currently offering very few features, the library's intention is to include the dynamic idioms we use 
+frequently, and to handle the edge cases we've run into when including them on various sites.
 
-Currently, clientele offers:
+Clientele requires jQuery.
+
+The library currently includes:
 
   * [default ON ] Image replacement to replace live text headings with non-websafe typography embedded in images
   * [default OFF] Image placeholders to automatically display a "spinner" image while large images load
@@ -17,6 +19,7 @@ QUICK START
 
 Instantiate the default functionality (currently: image replacement and default text handling) using the Standard class:
 
+    <script src="jquery-1.4.2-min.js" type="text/javascript"></script>
     <script src="clientele.js" type="text/javascript"></script>
     <script type="text/javascript"> 
     new clientele.Standard();
