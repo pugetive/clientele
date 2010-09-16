@@ -30,7 +30,7 @@ clientele = {
 }
 
 clientele.Error = function(text) {
-  this.debugMode = false;
+  this.debugMode = true;
 
   var complete_message = 'clientele.js DEBUG: ' + text;
 
@@ -196,17 +196,13 @@ clientele.Typography.prototype.titleToImagePath = function(title) {
 
 clientele.Imagery = function(options) {
 
-  this.placeheldImageSelector     = '.c-placeheld';
-  this.placeholderBackgroundColor = '#ccc';
-  this.pngAncestorSelector        = 'body'; // NOTE: performance cost to doing this globally with 'body'
+  this.placeheldImageSelector = '.c-placeheld';
+  this.placeholderBackgroundColor     = '#ccc';
+  this.supersleightSelector   = 'body'; // NOTE: performance cost to doing this globally with 'body'
   // this.placeholderText        = 'Loading...'
 
-  if (options['placeholderImage']){
-    this.doPlaceholdImages = true;
-  } else {
-    this.doPlaceholdImages = false;
-  }
-  this.doPngTransparency = false;
+  this.doPlaceholdImages      = true;
+  this.doPngTransparency      = false;
 
   // Replace the defaults with any passed in parameters;
   for (var n in options) { this[n] = arguments[0][n]; }
