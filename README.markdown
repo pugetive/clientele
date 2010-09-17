@@ -39,7 +39,7 @@ To add image placeholding to the basic functionality, you have to set the path t
     new clientele.Standard({imagery: {placeHolderImage: '/images/spinner.gif'}})
 
 To add IE6 transparency fixing to the basic functionality, simply turn it on.  Best to also specify a DOM element under which 
-to search, otherwise all elements under the body tag will get scanned for PNGs.  (All images get searched since background images
+to search, otherwise all elements under the body tag will get scanned for PNGs.  (All elements are checked since background images
 are also handled by supersleight):
 
     new clientele.Standard({imagery: {doPngTransparency: true,

@@ -28,6 +28,9 @@ $(function(){
   var imagery = new clientele.Imagery({placeholderImage: '/clientele/images/slider.gif'});
   // FIXME: Test ping-24 stuff here...somehow.
 
+  var slideshow = new clientele.Imagery.slideShow({imageDirectory: '/clientele/images',
+                                                   images: ['image-medium.jpg', 'heading-access-expired.png', 'heading-automatically-logged-out.png']});
+  
   module("Formality")
   test('bindDefaultedTextInputs()', function() {
     expect(2)

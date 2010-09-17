@@ -143,6 +143,7 @@ clientele.Typography.prototype.swapHeadings = function() {
         }
 
         // Handle classes specifying how to position the background image within the block: c-position-top-right
+        // (default is top left)
         if(positions = item.match(t._backgroundPositionRegExp)){
           background_image_position = positions[0].split('-').splice(-2).join(' ');
         }
@@ -266,6 +267,63 @@ clientele.Imagery.prototype.placeholdImages = function() {
       });
     });
   });
+}
+
+clientele.Imagery.slideShow = function(options) {
+  this.frameID         = '#c-slideshow';
+  this.interval        = 5;
+  this.imageDirectory  = '/images';
+
+  for (var n in options) { this[n] = arguments[0][n]; }
+
+  if (options['images'] == undefined){
+    new clientele.Error('images parameter is required to instantiate a slideShow.')
+    return false;
+  } else {
+    this._images         = options['images'];
+  }
+
+  this._frame = $(this.frameID);
+  this._imagePaths    = new Array();
+  for (image_index in this._images){
+    this._imagePaths.push(this.imageDirectory + '/' + this._images[image_index]);
+  }
+
+  this._currentSlideIndex = 0;
+
+
+  var slideshow_handler = this;
+
+  // Show the first slide if it's not already there.
+  if (this._frame.css('background-image') != this._imagePaths[0]){
+    slideshow_handler.showSlide(0);
+  }
+
+  function timedSlide() {
+    slideshow_handler.nextSlide();
+  }
+
+  setInterval(timedSlide, this.interval * 1000);
+
+}
+
+clientele.Imagery.slideShow.prototype.nextSlide = function() {
+  if (this._currentSlideIndex < this.images.length - 1) {
+    this.showSlide(this._currentSlideIndex + 1);
+  } else {
+    this.showSlide(0);
+  }
+}
+
+clientele.Imagery.slideShow.prototype.showSlide = function(slide_index){
+    this._currentSlideIndex = slide_index;
+    var new_background_image = this._imagePaths[slide_index];
+    this._frame.css('background', 'transparent url(' + new_background_image + ') no-repeat center center');
+//    this.rotator.supersleight();
+//    var link_target = this.slides[slide_number][1];
+    // this.rotator.click(function(){
+    //   window.location = link_target;
+    // })
 }
 
 /**
