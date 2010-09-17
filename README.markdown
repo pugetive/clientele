@@ -7,12 +7,16 @@ frequently, and to handle the edge cases we've run into when including them on v
 
 Clientele requires jQuery.
 
-The library currently includes:
+The library currently includes some functionality that finds and binds to elements:
 
   * [default ON ] Image replacement to replace live text headings with non-websafe typography embedded in images
   * [default OFF] Image placeholders to automatically display a "spinner" image while large images load
   * [default OFF] Automatic IE6 transparency fixing for PNG-24s under specified branch of the DOM
   * [default ON ] Show default text in input fields when specified, hide on focus.
+
+...as well as features that can be instantiated:
+
+  * slideShow to rotate background images within a DIV at a specified interval
   
 QUICK START
 -----------
