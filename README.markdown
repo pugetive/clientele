@@ -1,9 +1,9 @@
 CLIENTELE
 ---------
 
-Clientele was created to DRY up some of the JS work commonly required when cranking design-centered websites. 
-Currently offering very few features, the library's intention is to include the dynamic idioms we use 
-frequently, and to handle the edge cases we've run into when including them on various sites.
+Clientele was created to DRY up some of the JS work commonly required when cranking out design-centered websites. 
+It's basically just a convenient place to store the code to implement dynamic idioms we use frequently, and to handle the 
+edge cases we've run into when doing this stuff across a broad range of sites.
 
 Clientele requires jQuery.
 
