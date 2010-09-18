@@ -26,6 +26,7 @@ clientele = {
   Typography : function() {},
   Imagery    : function() {},
   Formality  : function() {},
+  Animation  : function() {},
   Standard   : function() {}
 }
 
@@ -273,6 +274,7 @@ clientele.Imagery.slideShow = function(options) {
   this.frameID         = '#c-slideshow';
   this.interval        = 5;
   this.imageDirectory  = '/images';
+  this.backgroundPosition = 'center center';
 
   for (var n in options) { this[n] = arguments[0][n]; }
 
@@ -281,6 +283,10 @@ clientele.Imagery.slideShow = function(options) {
     return false;
   } else {
     this._images         = options['images'];
+  }
+
+  if (options["imageTargets"]){
+    this._imageTargets = options["imageTargets"];
   }
 
   this._frame = $(this.frameID);
@@ -316,14 +322,16 @@ clientele.Imagery.slideShow.prototype.nextSlide = function() {
 }
 
 clientele.Imagery.slideShow.prototype.showSlide = function(slide_index){
-    this._currentSlideIndex = slide_index;
-    var new_background_image = this._imagePaths[slide_index];
-    this._frame.css('background', 'transparent url(' + new_background_image + ') no-repeat center center');
-//    this.rotator.supersleight();
-//    var link_target = this.slides[slide_number][1];
-    // this.rotator.click(function(){
-    //   window.location = link_target;
-    // })
+  var slideshow = this;
+  slideshow._currentSlideIndex = slide_index;
+  var new_background_image = slideshow._imagePaths[slide_index];
+  slideshow._frame.css('background', 'transparent url(' + new_background_image + ') no-repeat ' + slideshow.backgroundPosition);
+
+  if (slideshow._imageTargets && slideshow._imageTargets[slide_index]){
+    slideshow._frame.css('cursor', 'pointer').click(function(){
+      window.location = slideshow._imageTargets[slide_index];
+    });
+  }
 }
 
 /**
@@ -364,6 +372,46 @@ clientele.Formality.prototype.bindDefaultedTextInputs = function() {
                           'but not defined the default string of text via the [' + t.embeddedTextAttribute + '] attribute.');
     }
   });
+}
+
+/**
+* ----------------------------------------------------------------------
+* Animation
+* ----------------------------------------------------------------------
+*/
+clientele.Animation.tabs = function(wrapperID) {
+  this.wrapperID          = wrapperID;
+  this.tabSelector        = '.c-tab';
+  this.tabContentSelector = '.c-tab-content';
+
+  this._tabs = $('#' + this.wrapperID + ' ' + this.tabSelector);
+  this._contentBlocks = $('#' + this.wrapperID + ' ' + this.tabContentSelector);
+
+  this.showTab(0);
+
+  var t = this;
+  
+
+  var t_index = 0;
+  t._tabs.each(function() {
+    var tab_number = t_index;
+    $(this).click(function() {
+      t.showTab(tab_number);
+    });
+    ++t_index;
+  });
+}
+
+clientele.Animation.tabs.prototype.showTab = function(tab_index) {
+  this._tabs.addClass('c-tab-off');
+  this._contentBlocks.hide();
+
+  var selectedTab = $(this._tabs[tab_index]);
+  selectedTab.removeClass('c-tab-off');
+
+  var selectedTabContent = $(this._contentBlocks[tab_index]);
+  selectedTabContent.show();
+
 }
 
 /* ------------------------------------------------------------
