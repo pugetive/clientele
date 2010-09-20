@@ -329,7 +329,7 @@ clientele.Imagery.slideShow.prototype.showSlide = function(slide_index){
   slideshow._frame.css('background', 'transparent url(' + new_background_image + ') no-repeat ' + slideshow.backgroundPosition);
 
   if (slideshow.doPngTransparency){
-    $(slideshow.frameID).supersleight({sizing_method: 'scale'});
+    $(slideshow.frameID).supersleight();
   }
 
   if (slideshow._imageTargets && slideshow._imageTargets[slide_index]){
