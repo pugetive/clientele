@@ -225,7 +225,7 @@ clientele.Imagery = function(options) {
   }
 
   if (this.doPlaceholdImages) { this.placeholdImages(); }
-  if (this.doPngTransparency) { $(this.supersleightSelector).supersleight(); } 
+  if (this.doPngTransparency) { $(this.pngAncestorSelector).supersleight(); } 
 }
 
 
@@ -271,10 +271,11 @@ clientele.Imagery.prototype.placeholdImages = function() {
 }
 
 clientele.Imagery.slideShow = function(options) {
-  this.frameID         = '#c-slideshow';
-  this.interval        = 5;
-  this.imageDirectory  = '/images';
+  this.frameID            = '#c-slideshow';
+  this.interval           = 5;
+  this.imageDirectory     = '/images';
   this.backgroundPosition = 'center center';
+  this.doPngTransparency  = true;
 
   for (var n in options) { this[n] = arguments[0][n]; }
 
@@ -326,6 +327,10 @@ clientele.Imagery.slideShow.prototype.showSlide = function(slide_index){
   slideshow._currentSlideIndex = slide_index;
   var new_background_image = slideshow._imagePaths[slide_index];
   slideshow._frame.css('background', 'transparent url(' + new_background_image + ') no-repeat ' + slideshow.backgroundPosition);
+
+  if (slideshow.doPngTransparency){
+    $(slideshow.frameID).supersleight({sizing_method: 'scale'});
+  }
 
   if (slideshow._imageTargets && slideshow._imageTargets[slide_index]){
     slideshow._frame.css('cursor', 'pointer').click(function(){
@@ -427,7 +432,7 @@ jQuery.fn.supersleight = function(settings) {
     shim: 'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif',
 		apply_positioning: false
 	}, settings);
-	
+
 	return this.each(function(){
 		if (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) < 7 && parseInt(jQuery.browser.version, 10) > 4) {
 			jQuery(this).find('*').andSelf().each(function(i,obj) {
@@ -439,7 +444,7 @@ jQuery.fn.supersleight = function(settings) {
 					var mode = (self.css('background-repeat') == 'no-repeat' ? 'crop' : 'scale');
     			var styles = {
             'background' : 'none',
-    				'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=image, src='" + src + "')"
+    				'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='" + mode + "', src='" + src + "')"
     		  };
 					self.css(styles);
 				};
