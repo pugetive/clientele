@@ -28,22 +28,8 @@ clientele = {
   Typography : function() {},
   Imagery    : function() {},
   Formality  : function() {},
-  Animation  : function() {},
+  UI         : function() {},
   Standard   : function() {}
-}
-
-clientele.Error = function(text) {
-  this.debugMode = false;
-
-  var complete_message = 'clientele.js DEBUG: ' + text;
-
-  try {
-    console.log(complete_message);
-  } catch(err){
-    if (this.debugMode)
-      alert(complete_message);
-  }
-
 }
 
 /**
@@ -62,6 +48,21 @@ clientele.Standard = function(options) {
     new clientele.Imagery(options['imagery']);
     new clientele.Formality(options['formality']);
   });
+}
+
+
+clientele.Error = function(text) {
+  this.debugMode = false;
+
+  var complete_message = 'clientele.js DEBUG: ' + text;
+
+  try {
+    console.log(complete_message);
+  } catch(err){
+    if (this.debugMode)
+      alert(complete_message);
+  }
+
 }
 
 /**
@@ -188,7 +189,11 @@ clientele.Typography.prototype.titleToImagePath = function(title) {
   };
   var path_token = clean_title.toLowerCase().split(/ /).join('-');
 
-  var image_path = this.imageDirectory + "/" + this.imagePrefix + path_token + this.imageSuffix;
+  var path_prefix = '';
+  if (this.imageDirectory.match(/\S/)){
+    path_prefix = this.imageDirectory + "/";
+  }
+  var image_path = path_prefix + this.imagePrefix + path_token + this.imageSuffix;
   return image_path;
 }
 
@@ -389,10 +394,10 @@ clientele.Formality.prototype.bindDefaultedTextInputs = function() {
 
 /**
 * ----------------------------------------------------------------------
-* Animation
+* UI
 * ----------------------------------------------------------------------
 */
-clientele.Animation.tabs = function(wrapperID) {
+clientele.UI.tabs = function(wrapperID) {
   this.wrapperID          = wrapperID;
   this.selectorPrefix     = 'c-tab';
   this.tabSelector        = '.' + this.selectorPrefix;
@@ -415,14 +420,12 @@ clientele.Animation.tabs = function(wrapperID) {
   });
 }
 
-clientele.Animation.tabs.prototype.showTab = function(tab_index) {
+clientele.UI.tabs.prototype.showTab = function(tab_index) {
   this._tabs.removeClass(this.selectorPrefix + '-on');
   this._contentBlocks.hide();
 
   $(this._tabs[tab_index]).addClass(this.selectorPrefix + '-on');
-
   $(this._contentBlocks[tab_index]).show();
-
 }
 
 /* ------------------------------------------------------------

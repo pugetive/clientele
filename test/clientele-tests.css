@@ -1,0 +1,17 @@
+#headings h1, 
+#headings h2, 
+#headings h3 { outline: 1px solid red; }
+
+h1 { background: #ccc; }
+h2 { font-size: 30px; line-height: 1.2em; }
+h3 { font-size: 12px; }
+
+.c-tab { 
+  float: left; 
+  padding: 5px; 
+  background: #eee; 
+  margin: 2px; 
+  color: #666;
+}
+.c-tab-content { clear: left; }
+.c-tab-on { color: #000; background: #ccc; }

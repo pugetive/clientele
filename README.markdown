@@ -1,4 +1,4 @@
-CLIENTELE
+Clientele
 ---------
 
 Clientele was created to DRY up some of the JS work commonly required when cranking out design-centered websites. 
@@ -19,7 +19,7 @@ The library currently includes some functionality that finds and binds to elemen
   * slideShow to rotate background images within a DIV at a specified interval
   * inline tabbed content to turn tabs and their corresponding content on and off
   
-BASICS
+Basics
 ------
 
 Instantiate the default functionality (currently: image replacement and default text handling) using the Standard class:
@@ -39,7 +39,7 @@ Instantiate the default functionality (currently: image replacement and default 
       </fieldset>
     </form>
 
-IMAGE PLACEHOLDERS
+Image Placeholders
 ------------------
 
 To add image placeholding to the basic functionality, you have to set the path to your spinner image:
@@ -47,7 +47,7 @@ To add image placeholding to the basic functionality, you have to set the path t
     new clientele.Standard({imagery: {placeholderImage: '/images/spinner.gif'}})
 
 
-IE6 PNG-24 TRANSPARENCY FIX
+IE6 PNG-24 Transparency Fix
 ---------------------------
 
 To add IE6 transparency fixing to the basic functionality, simply turn it on.  Best to also specify a DOM selector under which 
@@ -57,7 +57,7 @@ are also handled by supersleight):
     new clientele.Standard({imagery: {doPngTransparency: true,
                                       pngAncestorSelector: '.elements-containing-pngs'}})
 
-INLINE TABBED CONTENT
+Inline Tabbed Content
 ---------------------
 You can create inline tabbed content simply by using a "c-tab" class for each tab element, and a "c-tab-content" class for each content block. Just specify a wrapping div within which the tabs and content can be found.  This feature *applies no styles* to the content.  The specific design of the tabs and their layout is left completely in the developer's hands. Highlighted tab will have the "c-tab-on" class.
 
@@ -88,8 +88,7 @@ Example CSS:
       background-image: url(/images/tab-2-on.png);
     }
 
-
-SLIDESHOWS
+Slideshows
 ----------
 
 Slideshows - background images rotating through a specific element at a specified interval (default 5 seconds), can be achieved by including and styling a div with id #c-slideshow and then instantiating a slideShow with the images (and optional targets for them to link to):

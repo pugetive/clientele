@@ -2,16 +2,12 @@
   <head>
     <title>Clientele Tests</title>
     <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="clientele-tests.css" type="text/css" media="screen" charset="utf-8" />
     <script src="../js/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../clientele.js" type="text/javascript" charset="utf-8"></script>
     <script src="qunit.js" type="text/javascript" charset="utf-8"></script>
     <script src="clientele-tests.js" type="text/javascript" charset="utf-8"></script>
 
-    <style type="text/css" media="screen">
-      h1, h2, h3 { outline: 1px solid red; background: #ccc; }
-      h2 { font-size: 30px; line-height: 1.2em; }
-      h3 { font-size: 12px; }
-    </style>
   </head>
   <body>
 
@@ -21,25 +17,26 @@
     <ol id="qunit-tests"></ol>
 
     <h1>Typography</h1>
-    <div style="float:left;width:50%;" id="swap-headings">
-      <h1 class="c-swap">No title title</h1>
-      <h2 class="c-swap">Access Expired</h2>
-      <!-- Apostraphe in the title below to test that the filename string gets cleaned. -->
-      <h3 class="c-swap c-position-top-right" title="Account Expire's On">Account Expires On</h2>
-      <h3 class="c-swap">Email Address</h2>
-      <h2 class="c-swap wrapped-3">Automatically Logged Out</h2>
+    <div id="headings">
+      <div style="float:left;width:50%;" id="swap-headings">
+        <h2 class="c-swap">No title title</h2>
+        <h2 class="c-swap">Access Expired</h2>
+        <!-- Apostraphe in the title below to test that the filename string gets cleaned. -->
+        <h3 class="c-swap c-position-top-right" title="Account Expire's On">Account Expires On</h2>
+        <h3 class="c-swap">Email Address</h2>
+        <h2 class="c-swap wrapped-3">Automatically Logged Out</h2>
+      </div>
+      <div style="float:left;width:50%;">
+        <h2>No title title</h2>
+        <h2>Access Expired</h2>
+        <h3>Account Expires On</h2>
+        <h3>Email<br />Address</h2>
+        <h2>Automatically Logged Out</h2>
+      </div>
     </div>
-    <div style="float:left;width:50%;">
-      <h1>No title title</h1>
-      <h2>Access Expired</h2>
-      <h3>Account Expires On</h2>
-      <h3>Email<br />Address</h2>
-      <h2>Automatically Logged Out</h2>
-    </div>
-    <div style="clear: both;">
+    <div style="clear: both;"></div>
 
     <h1>Imagery</h1>
-
 
     <img class="c-placeheld" width="96" height="96" src="/clientele/images/image-small.jpg" alt="Small Image" />
 
@@ -59,5 +56,17 @@
       <input class="c-defaulted" id="bad-defaulted" />
     </form>
 
+
+    <h1>UI</h1>
+        
+    <div id="tab-test">
+      <div class="c-tabs">
+        <div class="c-tab">one</div>
+        <div class="c-tab">two</div>
+      </div>
+    
+      <div class="c-tab-content">Content for first tab</div>
+      <div class="c-tab-content">Second tab stuff</div>
+    </div>
   </body>
 </html>
