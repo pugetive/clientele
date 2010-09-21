@@ -233,18 +233,17 @@ clientele.Imagery = function(options) {
 
 clientele.Imagery.prototype.placeholdImages = function() {
   var placeholder = this;
-  function preloadImage(imgSrc, callback) {
-    var objImagePreloader = new Image();
+  function preloadImage(image_source, callback) {
+    var image_preloader = new Image();
 
-    objImagePreloader.src = imgSrc;
-    if(objImagePreloader.complete){
+    image_preloader.src = image_source;
+    if(image_preloader.complete){
       callback();
-      objImagePreloader.onload=function(){};
+      image_preloader.onload = function(){};
     } else {
-      objImagePreloader.onload = function() {
+      image_preloader.onload = function() {
         callback();
-        //    clear onLoad, IE behaves irratically with animated gifs otherwise
-        objImagePreloader.onload=function(){};
+        image_preloader.onload = function(){};
       }
     }
   }
