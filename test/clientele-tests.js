@@ -33,7 +33,7 @@ $(function(){
   
   module("Formality")
   test('bindDefaultedTextInputs()', function() {
-    expect(2)
+    expect(2);
     var defaultText = 'Type here kthx...';
     var formality = new clientele.Formality({defaultTextColor: 'red'});
     equal($('#defaulted').val(), 'Type Here kthx', 'should have inserted input title as default text')

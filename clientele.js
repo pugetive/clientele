@@ -3,6 +3,8 @@
  @author Todd Gehman (toddgehman@gmail.com)
  Copyright (c) 2010 Todd Gehman
 
+ Includes the Supersleight jQuery plugin with some modifications.
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -276,14 +278,14 @@ clientele.Imagery.slideShow = function(options) {
   this.imageDirectory     = '/images';
   this.backgroundPosition = 'center center';
   this.doPngTransparency  = true;
-
+  
   for (var n in options) { this[n] = arguments[0][n]; }
 
   if (options['images'] == undefined){
     new clientele.Error('images parameter is required to instantiate a slideShow.')
     return false;
   } else {
-    this._images         = options['images'];
+    this._images = options['images'];
   }
 
   if (options["imageTargets"]){
@@ -297,7 +299,6 @@ clientele.Imagery.slideShow = function(options) {
   }
 
   this._currentSlideIndex = 0;
-
 
   var slideshow_handler = this;
 
@@ -329,12 +330,20 @@ clientele.Imagery.slideShow.prototype.showSlide = function(slide_index){
   slideshow._frame.css('background', 'transparent url(' + new_background_image + ') no-repeat ' + slideshow.backgroundPosition);
 
   if (slideshow.doPngTransparency){
-    $(slideshow.frameID).supersleight();
+    $(slideshow.frameID).supersleight({sizing_method: 'image'});
   }
 
+  var imageTarget = null;
+  
   if (slideshow._imageTargets && slideshow._imageTargets[slide_index]){
+    imageTarget = slideshow._imageTargets[slide_index];
+  } else if (slideshow.defaultTarget){
+    imageTarget = slideshow.defaultTarget; 
+  }
+  
+  if (imageTarget){
     slideshow._frame.css('cursor', 'pointer').click(function(){
-      window.location = slideshow._imageTargets[slide_index];
+      window.location = imageTarget;
     });
   }
 }
@@ -386,8 +395,9 @@ clientele.Formality.prototype.bindDefaultedTextInputs = function() {
 */
 clientele.Animation.tabs = function(wrapperID) {
   this.wrapperID          = wrapperID;
-  this.tabSelector        = '.c-tab';
-  this.tabContentSelector = '.c-tab-content';
+  this.selectorPrefix     = 'c-tab';
+  this.tabSelector        = '.' + this.selectorPrefix;
+  this.tabContentSelector = '.' + this.selectorPrefix + '-content';
 
   this._tabs = $('#' + this.wrapperID + ' ' + this.tabSelector);
   this._contentBlocks = $('#' + this.wrapperID + ' ' + this.tabContentSelector);
@@ -396,7 +406,6 @@ clientele.Animation.tabs = function(wrapperID) {
 
   var t = this;
   
-
   var t_index = 0;
   t._tabs.each(function() {
     var tab_number = t_index;
@@ -408,14 +417,12 @@ clientele.Animation.tabs = function(wrapperID) {
 }
 
 clientele.Animation.tabs.prototype.showTab = function(tab_index) {
-  this._tabs.addClass('c-tab-off');
+  this._tabs.removeClass(this.selectorPrefix + '-on');
   this._contentBlocks.hide();
 
-  var selectedTab = $(this._tabs[tab_index]);
-  selectedTab.removeClass('c-tab-off');
+  $(this._tabs[tab_index]).addClass(this.selectorPrefix + '-on');
 
-  var selectedTabContent = $(this._contentBlocks[tab_index]);
-  selectedTabContent.show();
+  $(this._contentBlocks[tab_index]).show();
 
 }
 
@@ -430,7 +437,8 @@ jQuery.fn.supersleight = function(settings) {
 		backgrounds: true,
     // You should install your own transparent gif rather than trying to rely on an external one.
     shim: 'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif',
-		apply_positioning: false
+		apply_positioning: false,
+		sizing_method: null
 	}, settings);
 
 	return this.each(function(){
@@ -442,6 +450,9 @@ jQuery.fn.supersleight = function(settings) {
 					var bg = self.css('background-image');
 					var src = bg.substring(5,bg.length-2);
 					var mode = (self.css('background-repeat') == 'no-repeat' ? 'crop' : 'scale');
+          if (settings.sizing_method){
+            mode = settings.sizing_method;
+          }
     			var styles = {
             'background' : 'none',
     				'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='" + mode + "', src='" + src + "')"
