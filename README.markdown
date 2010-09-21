@@ -65,6 +65,13 @@ You can create inline tabbed content simply by using a "c-tab" class for each ta
 
 Example CSS:
 
+    .c-tab {
+      float: left;
+      cursor: pointer;
+      height: 40px;
+      min-height: 40px;
+    }
+
     #tab-1 {
      background: transparent url(/images/tab-1-off.png) no-repeat bottom right; 
     }
