@@ -61,7 +61,7 @@ Inline Tabbed Content
 ---------------------
 You can create inline tabbed content simply by using a "c-tab" class for each tab element, and a "c-tab-content" class for each content block. Just specify a wrapping div within which the tabs and content can be found.  This feature *applies no styles* to the content.  The specific design of the tabs and their layout is left completely in the developer's hands. Highlighted tab will have the "c-tab-on" class.
 
-    new clientele.Animation.tabs('home-tabs');
+    new clientele.UI.tabs('home-tabs');
 
 Example CSS:
 
