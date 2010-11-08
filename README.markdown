@@ -73,8 +73,8 @@ Example CSS:
     }
     .c-tab-on { cursor: default; }
 
-    #tab-1 { background: transparent url(/images/tab-1-off.png) no-repeat bottom right; }
-    #tab-2 { background: transparent url(/images/tab-2-off.png) no-repeat bottom left; }
+    #tab-1 { background: transparent url(/images/tab-1-off.png) no-repeat right right; }
+    #tab-2 { background: transparent url(/images/tab-2-off.png) no-repeat left bottom; }
 
     #tab-1.c-tab-on { background-image: url(/images/tab-1-on.png); }
     #tab-2.c-tab-on { background-image: url(/images/tab-2-on.png); }
