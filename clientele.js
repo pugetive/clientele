@@ -191,9 +191,12 @@ clientele.Typography.prototype.titleToImagePath = function(title) {
     return false;
   }
 
-  var string_cleaning = {"'"    : '',
-                        '&amp;' : 'and',
-                        '&'     : 'and'};
+  var string_cleaning = {"'"     : '',
+                         ":"     : '',
+                         ','     : '',
+                         '&amp;' : 'and',
+                         '&'     : 'and'};
+
 
   var clean_title = title;
   for(key in string_cleaning) {
