@@ -43,6 +43,9 @@ clientele = {
 */
 
 clientele.Standard = function(options) {
+  if (typeof(options) == 'undefined'){
+    options = new Array();
+  }
   $(function(){
     new clientele.Typography(options['typography']);
     new clientele.Imagery(options['imagery']);
@@ -97,7 +100,7 @@ clientele.Typography = function(options) {
   // Replace the defaults with any passed in parameters;
   for (var n in options) { this[n] = arguments[0][n]; }
 
-  var position_match = '(top|bottom|left|right|center)';
+  var position_match = '(top|bottom|left|right|center|[0-9]+px)';
   this._backgroundPositionRegExp = new RegExp([this.backgroundPositionPrefix, position_match, position_match].join('-'), 'ig');
 
   if (this.doSwapHeadings) { this.swapHeadings(); }
@@ -165,6 +168,15 @@ clientele.Typography.prototype.swapHeadings = function() {
     }
 
     if (image_path){
+      var existing_background_image = heading_element.css('background-image');
+      var existing_background_color = heading_element.css('background-color');
+      if (existing_background_image != 'none' || existing_background_color != 'transparent'){
+        heading_wrapper = $("<div>").css({'background-image'    : existing_background_image,
+                                           'background-repeat'   : heading_element.css('background-repeat'),
+                                           'background-position' : heading_element.css('background-position'),
+                                           'background-color'    : existing_background_color});
+        heading_element.wrap(heading_wrapper);
+      }
       heading_element.html("&nbsp;").css('line-height', 0);
       heading_element.css('background', 'transparent url(' + image_path + ') no-repeat ' + background_image_position);
       if (text_height > 0){
@@ -209,6 +221,10 @@ clientele.Imagery = function(options) {
   this.placeholderBackgroundColor = '#ccc';
   this.pngAncestorSelector        = 'body'; // NOTE: performance cost to doing this globally with 'body'
   // this.placeholderText        = 'Loading...'
+
+  if (typeof(options) == 'undefined'){
+    options = new Array();
+  }
 
   if (options['placeholderImage']){
     this.doPlaceholdImages = true;
