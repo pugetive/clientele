@@ -82,7 +82,7 @@ Example CSS:
 
 Hideaway Dictionary
 -------------------
-Hideaway definition lists display a term but hide the corresponding definition. Clicking the term shows/hides the definition. Useful for dictionaries, FAQ pages, etc.
+Hideaway definition lists display a term but hide the corresponding definition. Clicking the term shows/hides the definition. Useful for dictionaries, FAQ pages, etc. For styling, an "open" class is toggled for the DT/DD tag pair.
 
     new clientele.UI.hideawayDictionary('.hideaway-list');
 
