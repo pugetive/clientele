@@ -18,6 +18,8 @@ The library currently includes some functionality that finds and binds to elemen
 
   * slideShow to rotate background images within a DIV at a specified interval
   * inline tabbed content to turn tabs and their corresponding content on and off
+  * hideawayDictionary to add a dynamic show/hide feature to FAQ pages, etc
+  * truncatedLists to allow each line item to be truncated to a specified length and wrapped in show/hide behavior
   
 Basics
 ------
