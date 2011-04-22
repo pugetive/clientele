@@ -195,7 +195,8 @@ clientele.Typography.prototype.titleToImagePath = function(title) {
                          ":"     : '',
                          ','     : '',
                          '&amp;' : 'and',
-                         '&'     : 'and'};
+                         '&'     : 'and',
+                         '?'     : ''};
 
 
   var clean_title = title;
