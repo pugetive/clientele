@@ -102,6 +102,37 @@ Example CSS, including a "plus or minus" sprite image for each term:
       background-position: 10px -29px;
     }
 
+Truncated List
+--------------
+Truncated list shortens the contents of each line item's contents to a specified character length and allows the entire contents to be seen after a "read more" or embedded toggle icon are clicked.
+
+    new clientele.UI.truncatedList({parent_selector : 'ul.truncated',
+                                    num_characters  : 100, 
+                                    read_more_text  : 'Read More',
+                                    embed_icon      : true});
+
+Example CSS, using both a read more link and toggle icon:
+
+    ul.truncated a.truncated-icon {
+      display: block;
+      float: left;
+      width: 15px;
+      height: 15px;
+      background: transparent url(../images/icon-plus-minus.png) no-repeat left top;
+      margin: 3px 5px;
+    }
+
+    ul.truncated a.truncated-icon.open {
+      background-position: left -40px;
+    }
+
+    ul.truncated span.truncated-content {
+      display: block;
+      float: left;
+      width: 500px;
+    }
+
+
 
 Slideshows
 ----------

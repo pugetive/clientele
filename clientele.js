@@ -464,6 +464,59 @@ clientele.UI.hideawayDictionary = function(selector) {
   });
 }
 
+clientele.UI.truncatedList = function(options) {
+
+  truncated_list = this;
+
+  truncated_list.parent_selector  = 'truncated-list';
+  truncated_list.num_characters   = 100;
+  truncated_list.read_more_text   = "...";
+  truncated_list.embed_icon       = false;
+
+  // Replace the defaults with any passed in parameters;
+  for (var n in options) { truncated_list[n] = arguments[0][n]; }
+
+  $(this.parent_selector + ' li').each(function(){
+    var $line_item = $(this);
+    var original_contents = $line_item.html();
+    var truncated_contents = original_contents.substring(0, truncated_list.num_characters);
+    truncated_contents = truncated_contents.replace(/\S+$/, '');
+
+    var $open_version = $('<span class="truncated-content">' + original_contents + '</span>')
+    var $closed_version = $('<span class="truncated-content">' + truncated_contents + '</span>')
+
+    var $toggle_icon = $('<a class="truncated-icon" href="#"></a>');
+
+    var $read_more_link = $('<a href="#" class="truncated-read-more-link">' + truncated_list.read_more_text + '</a>');
+    $read_more_link.click(function(){
+      $open_version.toggle();
+      $closed_version.toggle();
+      if (truncated_list.embed_icon){
+        $toggle_icon.toggleClass('open');
+      }
+      return false;
+    })
+
+    $closed_version.append($read_more_link);
+
+    $toggle_icon.click(function(){
+      $open_version.toggle();
+      $closed_version.toggle();
+      if (truncated_list.embed_icon){
+        $toggle_icon.toggleClass('open');
+      }
+      return false;
+    })
+
+    $line_item.html($closed_version).append($open_version.hide()).append('<div class="clear"></div>');
+
+    if (truncated_list.embed_icon){
+      $line_item.prepend($toggle_icon);
+    }
+
+  })
+}
+
 /* ------------------------------------------------------------
  * supersleight: jQuery plugin for dynamic handling of IE6 png transparency
  * http://allinthehead.com/retro/338/supersleight-jquery-plugin
