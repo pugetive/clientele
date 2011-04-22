@@ -79,6 +79,30 @@ Example CSS:
     #tab-1.c-tab-on { background-image: url(/images/tab-1-on.png); }
     #tab-2.c-tab-on { background-image: url(/images/tab-2-on.png); }
 
+
+Hideaway Dictionary
+-------------------
+Hideaway definition lists display a term but hide the corresponding definition. Clicking the term shows/hides the definition. Useful for dictionaries, FAQ pages, etc.
+
+    new clientele.UI.hideawayDictionary('.hideaway-list');
+
+Example CSS, including a "plus or minus" sprite image for each term:
+
+    dl.hideaway-list {
+      margin-left: 20px;
+    }
+
+    dl.hideaway-list dt {
+      padding: 10px 0 10px 35px;
+      background: transparent url(../images/icon-plus-minus.png) no-repeat 10px 12px;
+      cursor: pointer;
+    }
+
+    dl.hideaway-list dt.open {
+      background-position: 10px -29px;
+    }
+
+
 Slideshows
 ----------
 

@@ -447,6 +447,22 @@ clientele.UI.tabs.prototype.showTab = function(tab_index) {
   $(this._contentBlocks[tab_index]).show();
 }
 
+
+clientele.UI.hideawayDictionary = function(selector) {
+
+  $(selector + ' dd').hide();
+  $(selector + ' dt').click(function(){
+    var definition_term = $(this);
+
+    var definition_list = definition_term.closest('dl');
+    var term_index = definition_list.find('dt').index(definition_term)
+    var corresponding_definition = definition_list.find('dd').get(term_index);
+
+    definition_term.toggleClass('open');
+    $(corresponding_definition).toggleClass('open').toggle();
+  });
+}
+
 /* ------------------------------------------------------------
  * supersleight: jQuery plugin for dynamic handling of IE6 png transparency
  * http://allinthehead.com/retro/338/supersleight-jquery-plugin
