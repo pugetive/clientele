@@ -435,7 +435,7 @@ clientele.UI.tabs = function(wrapperID, tab_click_callback) {
     var tab_number = t_index;
     $(this).click(function() {
       t.showTab(tab_number);
-      if (typeof(callback) != 'undefined') {
+      if (typeof(tab_click_callback) != 'undefined') {
         tab_click_callback();
       }
     });
