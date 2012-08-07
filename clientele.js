@@ -417,7 +417,7 @@ clientele.Formality.prototype.bindDefaultedTextInputs = function() {
 * UI
 * ----------------------------------------------------------------------
 */
-clientele.UI.tabs = function(wrapperID) {
+clientele.UI.tabs = function(wrapperID, tab_click_callback) {
   this.wrapperID          = wrapperID;
   this.selectorPrefix     = 'c-tab';
   this.tabSelector        = '.' + this.selectorPrefix;
@@ -435,6 +435,9 @@ clientele.UI.tabs = function(wrapperID) {
     var tab_number = t_index;
     $(this).click(function() {
       t.showTab(tab_number);
+      if (typeof(callback) != 'undefined') {
+        tab_click_callback();
+      }
     });
     ++t_index;
   });
@@ -522,47 +525,47 @@ clientele.UI.truncatedList = function(options) {
  * http://allinthehead.com/retro/338/supersleight-jquery-plugin
  * ------------------------------------------------------------ 
  */
-jQuery.fn.supersleight = function(settings) {
-	settings = jQuery.extend({
-		imgs: true,
-		backgrounds: true,
-    // You should install your own transparent gif rather than trying to rely on an external one.
-    shim: 'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif',
-		apply_positioning: false,
-		sizing_method: null
-	}, settings);
+jQuery.fn.supersleight                                                        = function(settings) {
+ settings                                                                     = jQuery.extend({
+   imgs: true,
+   backgrounds: true,
+   // You should install your own transparent gif rather than trying to rely on an external one.
+   shim: 'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif',
+   apply_positioning: false,
+   sizing_method: null
+   }, settings);
 
-	return this.each(function(){
-		if (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) < 7 && parseInt(jQuery.browser.version, 10) > 4) {
-			jQuery(this).find('*').andSelf().each(function(i,obj) {
-				var self = jQuery(obj);
-				// background pngs
-				if (settings.backgrounds && self.css('background-image').match(/\.png/i) !== null) {
-					var bg = self.css('background-image');
-					var src = bg.substring(5,bg.length-2);
-					var mode = (self.css('background-repeat') == 'no-repeat' ? 'crop' : 'scale');
-          if (settings.sizing_method){
-            mode = settings.sizing_method;
-          }
-    			var styles = {
-            'background' : 'none',
-    				'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod='" + mode + "', src='" + src + "')"
-    		  };
-					self.css(styles);
-				};
-				// image elements
-				if (settings.imgs && self.is('img[src$=png]')){
-					var styles = {
-            'background' : 'none',
-						'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=image, src='" + self.attr('src') + "')"
-					};
-          self.css(styles).attr('src', settings.shim);
-				};
-				// apply position to 'active' elements
-				if (settings.apply_positioning && self.is('a, input') && (self.css('position') === '' || self.css('position') == 'static')){
-					self.css('position', 'relative');
-				};
-			});
-		};
-	});
-};
+   return this.each(function(){
+     if (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) < 7 && parseInt(jQuery.browser.version, 10) > 4) {
+       jQuery(this).find('*').andSelf().each(function(i,obj) {
+         var self                                                                  = jQuery(obj);
+         // background pngs
+         if (settings.backgrounds && self.css('background-image').match(/\.png/i) !== null) {
+           var bg                                                                   = self.css('background-image');
+           var src                                                                  = bg.substring(5,bg.length-2);
+           var mode                                                                 = (self.css('background-repeat') == 'no-repeat' ? 'crop' : 'scale');
+           if (settings.sizing_method){
+             mode                                                              = settings.sizing_method;
+           }
+           var styles                                                             = {
+             'background' : 'none',
+             'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled = true, sizingMethod='" + mode + "', src='" + src + "')"
+           };
+           self.css(styles);
+         };
+         // image elements
+         if (settings.imgs && self.is('img[src$                                    = png]')){
+           var styles                                                               = {
+             'background' : 'none',
+             'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled   = true, sizingMethod=image, src='" + self.attr('src') + "')"
+           };
+           self.css(styles).attr('src', settings.shim);
+         };
+         // apply position to 'active' elements
+         if (settings.apply_positioning && self.is('a, input') && (self.css('position') === '' || self.css('position') == 'static')){
+           self.css('position', 'relative');
+         };
+       });
+     };
+   });
+ };
